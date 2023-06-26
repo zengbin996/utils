@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>日语发音练习</title>
+  </head>
+
+  <body>
+    <div>
+      <span>难度: </span>
+      <label for="Easy"><input type="radio" name="level" id="Easy" value="Easy" checked />简单</label>
+      <label for="Medium"><input type="radio" name="level" id="Medium" value="Medium" />中级</label>
+      <label for="Hard"><input type="radio" name="level" id="Hard" value="Hard" />高级</label>
+
+      <p>请在下面输入框中输入: <span id="CurrentGame"></span></p>
+
+      <input type="text" id="InputText" /> <button id="SubmitGame">确认</button> <span id="Result"></span>
+    </div>
+
+    <script>
+      var Kana = [
+        'あ い う え お か き く け こ さ し す せ そ た ち つ て と な に ぬ ね の は ひ ふ へ ほ ま み む め も や ゆ よ ら り る れ ろ わ を ん ',
+        'が ぎ ぐ げ ご ざ じ ず ぜ ぞ だ ぢ づ で ど ば び ぶ べ ぼ ぱ ぴ ぷ ぺ ぽ ',
+        'ア イ ウ エ オ カ キ ク ケ コ サ シ ス セ ソ タ チ ツ テ ト ナ ニ ヌ ネ ノ ハ ヒ フ ヘ ホ マ ミ ム メ モ ヤ ユ ヨ ラ リ ル レ ロ ワ ヲ ン ',
+        'ガ ギ グ ゲ ゴ ザ ジ ズ ゼ ゾ ダ ヂ ヅ デ ド バ ビ ブ ベ ボ パ ピ プ ペ ポ ',
+        'きゃ きゅ きょ しゃ しゅ しょ ちゃ ちゅ ちょ にゃ にゅ にょ ひゃ ひゅ ひょ みゃ みゅ みょ りゃ りゅ りょ ぎゃ ぎゅ ぎょ じゃ じゅ じょ ぢゃ ぢゅ ぢょ びゃ びゅ びょ ぴゃ ぴゅ ぴょ ',
+        'キャ キュ キョ シャ シュ ショ チャ チュ チョ ニャ ニュ ニョ ヒャ ヒョ ヒョ ミャ ミュ ミョ リャ リュ リョ ギャ ギュ ギョ ジャ ジュ ジョ ヂャ ヂュ ヂョ ビャ ビュ ビョ ピャ ピュ ピョ ',
+      ]
+
+      var currentKana = (Kana[0] + Kana[1]).split(' ')
+      var currentGame = ''
+
+      Easy.addEventListener('click', () => {
+        currentKana = (Kana[0] + Kana[1]).split(' ')
+        buildKana()
+      })
+
+      Medium.addEventListener('click', () => {
+        currentKana = (Kana[0] + Kana[1] + Kana[3] + Kana[4]).split(' ')
+        buildKana()
+      })
+
+      Hard.addEventListener('click', () => {
+        currentKana = (Kana[0] + Kana[1] + Kana[3] + Kana[4] + Kana[5] + Kana[6]).split(' ')
+        buildKana()
+      })
+
+      function buildKana() {
+        currentGame = currentKana[Math.floor(Math.random() * currentKana.length)]
+        CurrentGame.innerHTML = currentGame
+      }
+
+      SubmitGame.addEventListener('click', () => {
+        if (currentGame == InputText.value) {
+          Result.innerHTML = '回答正确'
+          Result.style = 'color: green;'
+
+          setTimeout(() => {
+            Result.innerHTML = ''
+          }, 1000)
+
+          InputText.value = ''
+          buildKana()
+        } else {
+          Result.innerHTML = '回答错误'
+          Result.style = 'color: red;'
+        }
+      })
+
+      buildKana()
+    </script>
+  </body>
+</html>
