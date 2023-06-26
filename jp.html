@@ -52,7 +52,7 @@
         CurrentGame.innerHTML = currentGame
       }
 
-      SubmitGame.addEventListener('click', () => {
+      function judge() {
         if (currentGame == InputText.value) {
           Result.innerHTML = '回答正确'
           Result.style = 'color: green;'
@@ -67,7 +67,15 @@
           Result.innerHTML = '回答错误'
           Result.style = 'color: red;'
         }
+      }
+
+      InputText.addEventListener('keydown', function (event) {
+        if (event.keyCode === 13) {
+          judge()
+        }
       })
+
+      SubmitGame.addEventListener('click', judge)
 
       buildKana()
     </script>
